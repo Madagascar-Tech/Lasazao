@@ -10,6 +10,154 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cabin:700">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        #map-section {
+            padding: 50px 0;
+            background-color: #000;  /* Pour correspondre au thème sombre */
+        }
+        #map-container {
+            width: 90%;
+            margin: 0 auto;  /* Centre le conteneur */
+            padding: 15px;
+        }
+        #map { 
+            height: 600px; 
+            width: 100%; 
+            z-index: 1;
+            position: relative;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .custom-popup .leaflet-popup-content-wrapper {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 3px 14px rgba(0, 0, 0, 0.2);
+        }
+        .custom-popup .leaflet-popup-content {
+            margin: 15px;
+            font-family: 'Cabin', sans-serif;
+        }
+        .custom-popup .leaflet-popup-tip {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Styles responsives */
+        @media (max-width: 992px) {
+            #map-container {
+                width: 95%;
+            }
+        }
+        @media (max-width: 768px) {
+            #map-container {
+                width: 98%;
+                padding: 10px;
+            }
+            #map {
+                height: 400px;
+            }
+        }
+
+        /* Styles pour le modal de contact */
+        .modal-content {
+            background-color: #000;
+            color: #fff;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+        }
+
+        .modal-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-title {
+            font-family: 'Cabin', sans-serif;
+            color: #fff;
+        }
+
+        .contact-form .form-control {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form .form-control:focus {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: none;
+        }
+
+        .contact-form .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .contact-form textarea.form-control {
+            min-height: 120px;
+        }
+
+        .btn-contact {
+            background-color: transparent;
+            color: #fff;
+            padding: 12px 24px;
+            border: 2px solid #fff;
+            border-radius: 4px;
+            font-family: 'Cabin', sans-serif;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-contact:hover {
+            color: #000;
+            border-color: #fff;
+        }
+
+        .btn-contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: #fff;
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn-contact:hover::before {
+            width: 100%;
+        }
+
+        /* Animation pour le bouton en responsive */
+        @media (hover: none) {
+            .btn-contact:active {
+                background-color: #fff;
+                color: #000;
+            }
+        }
+
+        .close {
+            color: #fff;
+            opacity: 0.7;
+        }
+
+        .close:hover {
+            color: #fff;
+            opacity: 1;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -59,18 +207,28 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-                    <h2>Contact us</h2>
-                    <p>Feel free to leave us a comment on the<a href="#">&nbsp;Grayscale template overview page</a>&nbsp;to give some feedback about this theme!</p>
-                    <ul class="list-inline banner-social-buttons">
-                        <li class="list-inline-item">&nbsp;<button class="btn btn-primary btn-lg btn-default" type="button"><i class="fa fa-google-plus fa-fw"></i><span class="network-name">&nbsp; Google+</span></button></li>
-                        <li class="list-inline-item">&nbsp;<button class="btn btn-primary btn-lg btn-default" type="button"><i class="fa fa-twitter fa-fw"></i><span class="network-name">&nbsp;Twitter</span></button></li>
-                        <li class="list-inline-item">&nbsp;<button class="btn btn-primary btn-lg btn-default" type="button"><i class="fa fa-github fa-fw"></i><span class="network-name">&nbsp;github</span></button></li>
-                    </ul>
+                    <h2>Contactez-nous</h2>
+                    <p>Vous avez des questions sur Madagascar ? N'hésitez pas à nous contacter !</p>
+                    <button class="btn btn-contact" data-toggle="modal" data-target="#contactModal">
+                        Ouvrir le formulaire de contact
+                    </button>
                 </div>
             </div>
         </div>
     </section>
-    <div class="map-clean"><iframe allowfullscreen="" frameborder="0" src="https://cdn.bootstrapstudio.io/placeholders/map.html" width="100%" height="450"></iframe></div>
+    <section id="map-section" class="content-section text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Découvrez Madagascar</h2>
+                    <p class="mb-4">Explorez les principales villes de la Grande Île</p>
+                </div>
+            </div>
+        </div>
+        <div id="map-container">
+            <div id="map"></div>
+        </div>
+    </section>
     <footer>
         <div class="container text-center">
             <p>Copyright ©&nbsp;Gasikara 2021</p>
@@ -80,6 +238,107 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="assets/js/grayscale.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var map = L.map('map', {
+                zoomControl: false,
+                scrollWheelZoom: false
+            }).setView([-18.766947, 46.869107], 6);
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors',
+            }).addTo(map);
+
+            L.control.zoom({
+                position: 'bottomright'
+            }).addTo(map);
+
+            var cities = [
+                {
+                    name: "Antananarivo",
+                    coords: [-18.8792, 47.5079],
+                    desc: "Capitale de Madagascar"
+                },
+                {
+                    name: "Toamasina",
+                    coords: [-18.1496, 49.4023],
+                    desc: "Principal port maritime"
+                },
+                {
+                    name: "Mahajanga",
+                    coords: [-15.7167, 46.3167],
+                    desc: "Ville côtière importante"
+                },
+                {
+                    name: "Antsiranana",
+                    coords: [-12.2787, 49.2910],
+                    desc: "Ville portuaire du nord"
+                }
+            ];
+
+            cities.forEach(function(city) {
+                L.marker(city.coords)
+                    .bindPopup('<strong>' + city.name + '</strong><br>' + city.desc, {
+                        className: 'custom-popup'
+                    })
+                    .addTo(map);
+            });
+
+            L.control.scale({
+                imperial: false,
+                position: 'bottomleft'
+            }).addTo(map);
+
+            fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries/MDG.geo.json')
+                .then(response => response.json())
+                .then(data => {
+                    L.geoJSON(data, {
+                        style: {
+                            color: "#ff7800",
+                            weight: 2,
+                            opacity: 0.65,
+                            fillOpacity: 0.1
+                        }
+                    }).addTo(map);
+                })
+                .catch(error => console.error('Erreur lors du chargement du GeoJSON:', error));
+        });
+    </script>
+
+    <!-- Ajouter le modal de contact -->
+    <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contactModalLabel">Envoyez-nous un message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Votre nom" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Votre email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Sujet">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Votre message" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-contact">Envoyer</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
