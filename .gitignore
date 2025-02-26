@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/Haja/FileContentIndex/af1d2b2d-dcbd-4a10-9eda-387f0e0832b7.vsidx
+*.vsidx
+/.vs/Haja/v17/.wsuo
+/.vs/Haja/v17/DocumentLayout.backup.json
+/.vs/slnx.sqlite
+/.vs/VSWorkspaceState.json
+/.vs/Haja/v17/DocumentLayout.json
