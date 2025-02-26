@@ -24,6 +24,11 @@
                     <li class="nav-item nav-link js-scroll-trigger"><a class="nav-link active js-scroll-trigger" href="#about">About</a></li>
                     <li class="nav-item nav-link js-scroll-trigger"><a class="nav-link js-scroll-trigger" href="#download">download</a></li>
                     <li class="nav-item nav-link js-scroll-trigger"><a class="nav-link js-scroll-trigger" href="#contact">contact</a></li>
+                    <li class="nav-item nav-link">
+                        <button class="btn btn-modal" data-toggle="modal" data-target="#loginModal">
+                            <i class="fa fa-user"></i> Connexion
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -143,6 +148,60 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-modal" data-dismiss="modal">Fermer</button>
                     <button type="submit" class="btn btn-modal">Envoyer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal de connexion -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <div class="auth-icon-circle mb-4">
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <h3>Connexion</h3>
+                        <p class="text-muted">Connectez-vous à votre compte</p>
+                    </div>
+                    <form class="login-form">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-envelope"></i>
+                                    </span>
+                                </div>
+                                <input type="email" class="form-control" placeholder="Email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-lock"></i>
+                                    </span>
+                                </div>
+                                <input type="password" class="form-control" placeholder="Mot de passe" required>
+                            </div>
+                        </div>
+                        <div class="form-group d-flex justify-content-between align-items-center">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="rememberMe">
+                                <label class="custom-control-label" for="rememberMe">Se souvenir de moi</label>
+                            </div>
+                            <a href="#" class="forgot-link">Mot de passe oublié?</a>
+                        </div>
+                        <button type="submit" class="btn btn-modal btn-block">Se connecter</button>
+                        <div class="text-center mt-4">
+                            <p class="mb-0">Pas encore de compte? <a href="#" class="register-link">S'inscrire</a></p>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
