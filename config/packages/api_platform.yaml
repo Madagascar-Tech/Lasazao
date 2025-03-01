@@ -1,21 +1,29 @@
 api_platform:
-    title: 'Symfony API Platform'
-    description: 'API REST avec Symfony et API Platform'
+    title: 'API Lasazao'
+    description: 'API pour le projet Lasazao'
     version: '1.0.0'
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
     formats:
-        jsonld:
-            mime_types: ['application/ld+json']
-        json:
-            mime_types: ['application/json']
-        html:
-            mime_types: ['text/html']
-    patch_formats:
-        json: ['application/merge-patch+json']
+        json: ['application/json']
+        jsonld: ['application/ld+json']
+        html: ['text/html']
     swagger:
         versions: [3]
         api_keys:
             JWT:
                 name: Authorization
                 type: header
+        swagger_ui_extra_configuration:
+            persistAuthorization: true
+            displayOperationId: true
+            displayRequestDuration: true
+            filter: true
+            operationsSorter: method
+            tagsSorter: alpha
+            docExpansion: none
+            tryItOutEnabled: true
+    defaults:
+        stateless: true
+        cache_headers:
+            vary: ['Content-Type', 'Authorization', 'Origin']
