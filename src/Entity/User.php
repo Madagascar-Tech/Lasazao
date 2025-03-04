@@ -11,6 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Doctrine\ORM\Event\PrePersistEventArgs;
+use Doctrine\ORM\Event\PreUpdateEventArgs;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
@@ -40,6 +43,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
     normalizationContext: ['groups' => ['user:read']],
     denormalizationContext: ['groups' => ['user:write']]
 )]
+#[ORM\HasLifecycleCallbacks]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -72,6 +76,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     #[ApiProperty(description: 'Le nom de famille de l\'utilisateur')]
     private ?string $lastName = null;
+
+    private ?string $plainPassword = null;
 
     public function getId(): ?int
     {
@@ -110,7 +116,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     // Méthode pour faciliter l'ajout d'un rôle admin
     public function makeAdmin(): self
     {
-        $this->roles[] = 'ROLE_ADMIN';
+        $this->roles = ['ROLE_ADMIN'];
         return $this;
     }
 
@@ -196,5 +202,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->email = $data['email'];
         $this->password = $data['password'];
         $this->roles = $data['roles'];
+    }
+
+    public function setPlainPassword(string $password): static
+    {
+        $this->plainPassword = $password;
+        return $this;
+    }
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
     }
 }

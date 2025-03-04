@@ -19,15 +19,20 @@ class UserRepository extends ServiceEntityRepository
     public function findAdmin(): ?User
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('JSON_CONTAINS(u.roles, :role) = 1')
-            ->setParameter('role', '"ROLE_ADMIN"')
+            ->andWhere('u.roles LIKE :role')
+            ->setParameter('role', '%ROLE_ADMIN%')
             ->getQuery()
             ->getOneOrNullResult();
     }
 
     public function hasAdmin(): bool
     {
-        return null !== $this->findAdmin();
+        $qb = $this->createQueryBuilder('u')
+            ->select('COUNT(u.id)')
+            ->where('JSON_CONTAINS(u.roles, :role) = 1')
+            ->setParameter('role', '"ROLE_ADMIN"');
+
+        return (bool) $qb->getQuery()->getSingleScalarResult();
     }
 
 //    /**

@@ -41,6 +41,7 @@ class CreateAdminCommand extends Command
         $user->setLastName('System');
         $user->makeAdmin();
 
+        // Hash le mot de passe directement
         $hashedPassword = $this->passwordHasher->hashPassword($user, 'admin123');
         $user->setPassword($hashedPassword);
 
