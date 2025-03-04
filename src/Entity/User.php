@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Delete;
@@ -14,6 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Doctrine\ORM\Event\PrePersistEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
@@ -54,6 +56,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[Groups(['user:read', 'user:write'])]
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\NotBlank]
+    #[Assert\Email]
     #[ApiProperty(description: 'L\'email de l\'utilisateur')]
     private ?string $email = null;
 
@@ -69,14 +73,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[Groups(['user:read', 'user:write'])]
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     #[ApiProperty(description: 'Le prénom de l\'utilisateur')]
     private ?string $firstName = null;
 
     #[Groups(['user:read', 'user:write'])]
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     #[ApiProperty(description: 'Le nom de famille de l\'utilisateur')]
     private ?string $lastName = null;
 
+    #[Groups(['user:write'])]
+    #[Assert\NotBlank(groups: ['user:create'])]
+    #[Assert\Length(min: 6)]
     private ?string $plainPassword = null;
 
     public function getId(): ?int
