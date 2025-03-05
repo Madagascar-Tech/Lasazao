@@ -1,0 +1,220 @@
+/* Style du dashboard */
+.dashboard-section {
+    padding-top: 100px;
+    min-height: 100vh;
+    background-color: #000;
+    color: #cac7c7;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255,255,255,0.1);
+    margin-bottom: 20px;
+    background-color: #161616;
+    color: #d4d4d4;
+}
+
+.icon-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    border: 2px solid rgba(255,255,255,0.1);
+}
+
+/* Couleurs des icônes */
+.bg-primary {
+    background-color: #42DCA3 !important;
+    color: #000 !important;
+}
+
+.bg-success {
+    background-color: #28a745 !important;
+    color: #000 !important;
+}
+
+.bg-warning {
+    background-color: #42DCA3 !important;
+    color: #000 !important;
+}
+
+.bg-info {
+    background-color: #42DCA3 !important;
+    color: #000 !important;
+}
+
+/* Listes d'activités et notifications */
+.activity-list, .notification-list {
+    margin-top: 20px;
+}
+
+.activity-item, .notification-item {
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.activity-item:last-child, .notification-item:last-child {
+    border-bottom: none;
+}
+
+.activity-item i, .notification-item i {
+    margin-right: 10px;
+    color: #42DCA3;
+}
+
+.activity-item small {
+    float: right;
+    color: rgba(255,255,255,0.5);
+}
+
+/* Paramètres */
+.settings-list {
+    margin-top: 20px;
+}
+
+.settings-list .form-group {
+    margin-bottom: 15px;
+}
+
+/* Style des switchs */
+.custom-control-input:checked ~ .custom-control-label::before {
+    background-color: #42DCA3;
+    border-color: #42DCA3;
+}
+
+.custom-control-label {
+    color: #fff;
+}
+
+/* Profil */
+.profile-info p {
+    margin-bottom: 15px;
+    color: rgba(255,255,255,0.8);
+}
+
+.profile-info strong {
+    color: #fff;
+}
+
+/* Boutons */
+.btn-modal {
+    background-color: #42DCA3;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+.btn-modal:hover {
+    background-color: #3ac393;
+    transform: translateY(-2px);
+    color: #000;
+}
+
+/* Bouton de déconnexion */
+#logoutButton {
+    background-color: transparent;
+    border: 2px solid #42DCA3;
+    color: #42DCA3;
+    transition: all 0.3s ease;
+}
+
+#logoutButton:hover {
+    background-color: #42DCA3;
+    color: #000;
+    transform: translateY(-2px);
+}
+
+#logoutButton i {
+    margin-right: 5px;
+}
+
+/* Modals */
+.modal-content {
+    background-color: #161616;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.close {
+    color: #fff;
+}
+
+/* Form controls */
+.form-control {
+    background-color: #242424;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+}
+
+.form-control:focus {
+    background-color: #242424;
+    border-color: #42DCA3;
+    color: #fff;
+    box-shadow: 0 0 0 0.2rem rgba(66, 220, 163, 0.25);
+}
+
+/* Animations */
+.card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Notifications */
+.alert {
+    animation: slideIn 0.3s ease-out;
+    background-color: #161616;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+}
+
+.alert-success {
+    background-color: rgba(66, 220, 163, 0.2);
+    border-color: #42DCA3;
+    color: #42DCA3;
+}
+
+.alert-danger {
+    background-color: rgba(220, 53, 69, 0.2);
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-section {
+        padding-top: 80px;
+    }
+    
+    .activity-item small {
+        display: block;
+        float: none;
+        margin-top: 5px;
+    }
+} 
