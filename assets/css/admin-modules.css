@@ -1,0 +1,193 @@
+/* Styles pour les modules d'administration */
+
+/* Styles communs pour les modules */
+.module-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255,255,255,0.1);
+    margin-bottom: 20px;
+    background-color: #161616;
+    color: #d4d4d4;
+    transition: transform 0.2s ease-in-out;
+}
+
+.module-card:hover {
+    transform: translateY(-5px);
+}
+
+.module-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.module-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    background-color: #42DCA3;
+    color: #000;
+    margin-right: 15px;
+}
+
+.module-title {
+    margin: 0;
+    color: #fff;
+    font-size: 1.25rem;
+}
+
+.module-action {
+    margin-left: auto;
+}
+
+/* Tableau de données */
+.data-table {
+    width: 100%;
+    color: #d4d4d4;
+    margin-top: 15px;
+}
+
+.data-table th {
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+    font-weight: 500;
+}
+
+.data-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table tr:hover td {
+    background-color: rgba(66, 220, 163, 0.05);
+}
+
+/* Actions sur les lignes du tableau */
+.row-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    background-color: transparent;
+    border: none;
+    color: #d4d4d4;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.action-btn:hover {
+    color: #42DCA3;
+    background-color: rgba(66, 220, 163, 0.1);
+}
+
+.action-btn.edit:hover {
+    color: #42DCA3;
+}
+
+.action-btn.delete:hover {
+    color: #dc3545;
+}
+
+/* Pagination */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pagination li {
+    margin: 0 5px;
+}
+
+.pagination a {
+    display: block;
+    padding: 8px 12px;
+    background-color: #242424;
+    color: #d4d4d4;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.pagination a:hover,
+.pagination a.active {
+    background-color: #42DCA3;
+    color: #000;
+}
+
+/* Formulaires dans les modales */
+.form-group label {
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Statut */
+.status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+.status-active {
+    background-color: rgba(66, 220, 163, 0.2);
+    color: #42DCA3;
+}
+
+.status-inactive {
+    background-color: rgba(220, 53, 69, 0.2);
+    color: #dc3545;
+}
+
+.status-pending {
+    background-color: rgba(255, 193, 7, 0.2);
+    color: #ffc107;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .module-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .module-action {
+        margin-left: 0;
+        margin-top: 15px;
+        width: 100%;
+    }
+    
+    .data-table {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    .row-actions {
+        flex-direction: column;
+        gap: 5px;
+    }
+} 

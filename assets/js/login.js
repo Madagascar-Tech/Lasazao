@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const savedToken = localStorage.getItem('authToken');
     if (savedToken) {
         // Rediriger directement vers le dashboard si déjà connecté
-        window.location.href = 'pages/dashboard.html';
+        window.location.href = 'pages/admin/dashboard.html';
         return;
     }
 
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     $('#loginModal').modal('hide');
                     
                     // Redirection vers le dashboard
-                    window.location.href = 'pages/dashboard.html';
+                    window.location.href = 'pages/admin/dashboard.html';
                 } else {
                     showError('Réponse du serveur invalide');
                 }

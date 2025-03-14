@@ -68,8 +68,16 @@ document.addEventListener('DOMContentLoaded', function() {
         !currentPath.includes('login.html')) {
         
         if (!isAuthenticated()) {
+            // Déterminer le chemin de redirection en fonction de l'emplacement actuel
+            let redirectPath = '../index.html?login=required';
+            
+            // Si nous sommes dans un sous-dossier de pages (comme /pages/admin/)
+            if (currentPath.includes('/admin/') || currentPath.split('/').length > 3) {
+                redirectPath = '../../index.html?login=required';
+            }
+            
             // Rediriger vers la page d'accueil avec un paramètre pour ouvrir la modale de connexion
-            window.location.href = '../index.html?login=required';
+            window.location.href = redirectPath;
         }
     }
     
@@ -84,8 +92,16 @@ document.addEventListener('DOMContentLoaded', function() {
             sessionStorage.removeItem('authToken');
             localStorage.removeItem('userData');
             
+            // Déterminer le chemin de redirection en fonction de l'emplacement actuel
+            let redirectPath = '../index.html';
+            
+            // Si nous sommes dans un sous-dossier de pages (comme /pages/admin/)
+            if (window.location.pathname.includes('/admin/') || window.location.pathname.split('/').length > 3) {
+                redirectPath = '../../index.html';
+            }
+            
             // Rediriger vers la page d'accueil
-            window.location.href = '../index.html';
+            window.location.href = redirectPath;
         });
     }
     
